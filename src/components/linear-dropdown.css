@@ -1,0 +1,30 @@
+.list-container{
+    display: flex;
+    border: solid 1px dodgerblue;
+    border-radius: 4px;
+    width: auto;
+    border-right: none;
+}
+
+
+.list-item{
+    padding: 10px 8px;
+
+    border-right: solid 1px dodgerblue;
+}
+
+.hidden-list{
+    background-color: beige;
+
+}
+
+.sep{
+    background: lightpink;
+    height: 300px;
+    margin-bottom: 10px;
+}
+
+.hidden-list-item{
+    padding:10px 8px;
+    border-bottom: solid 1px dodgerblue;
+}
