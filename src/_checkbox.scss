@@ -1,0 +1,50 @@
+.checkbox {
+  margin-right: 1rem;
+  position: relative;
+
+  label {
+    background: $white-color;
+    border: 1px solid $light-grey;
+    cursor: pointer;
+    height: 32px;
+    left: 0;
+    position: absolute;
+    top: -3px;
+    width: 32px;
+
+    &::after {
+      background: transparent;
+      border: 1px solid $black-border-color;
+      border-right: 0;
+      border-top: 0;
+      content: '';
+      height: 6px;
+      left: 8px;
+      opacity: 0;
+      position: absolute;
+      top: 8px;
+      transform: rotate(-45deg);
+      width: 14px;
+    }
+  }
+
+  input[type='checkbox'] { // sass-lint:disable-line force-attribute-nesting, no-qualifying-elements
+
+    &:checked + label:after { // sass-lint:disable-line force-pseudo-nesting,pseudo-element
+      opacity: 1;
+    }
+  }
+}
+
+//
+//.checkbox input[type=checkbox]:checked + label:after {
+//  opacity: 1;
+//}
+
+//.checkbox label
+
+//.checkbox label:hover::after {
+//  opacity: 0.5;
+//}
+
+
