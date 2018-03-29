@@ -1,0 +1,272 @@
+<svg
+                    width="501px"
+                    height="354px"
+                    viewBox="0 0 501 354"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg">
+
+                    <defs>
+                        <rect id="path-1" x="70" y="9" width="432" height="280"/>
+                        <circle id="path-2" cx="287" cy="149" r="18"/>
+                        <circle id="path-3" cx="201" cy="205" r="18"/>
+                        <circle id="path-4" cx="113" cy="261" r="18"/>
+                        <circle id="path-5" cx="373" cy="93" r="18"/>
+                        <circle id="path-6" cx="460" cy="37" r="18"/>
+                        <path
+                            d="M6,2.27373675e-13 L292,2.06945572e-13 C295.313708,2.06336853e-13 298,2.6862915 298,6 L298,60.7636364 C298,64.0773449 295.313708,66.7636364 292,66.7636364 L280.896484,66.7636364 L272.813965,72 L264.808594,66.7636364 L6,66.7636364 C2.6862915,66.7636364 5.4863325e-14,64.0773449 5.15143483e-14,60.7636364 L0,6 C-1.87739444e-15,2.6862915 2.6862915,2.2442968e-13 6,2.23820962e-13 Z"
+                            id="path-7"/>
+                        <filter
+                            x="-6.0%"
+                            y="-25.0%"
+                            width="112.1%"
+                            height="150.0%"
+                            filterUnits="objectBoundingBox"
+                            id="filter-8">
+                            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"/>
+                            <feGaussianBlur
+                                stdDeviation="6"
+                                in="shadowOffsetOuter1"
+                                result="shadowBlurOuter1"/>
+                            <feColorMatrix
+                                values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.25 0"
+                                type="matrix"
+                                in="shadowBlurOuter1"/>
+                        </filter>
+                    </defs>
+                    <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+                        <g id="Desktop" transform="translate(-281.000000, -516.000000)">
+                            <g id="Graph-tooltip" transform="translate(280.000000, 528.000000)">
+                                <g id="Rectangle-10-Copy">
+                                    <use fill="#F2F4F7" fillRule="evenodd" xlinkHref="#path-1"/>
+                                    <rect
+                                        stroke="#A6A6A6"
+                                        strokeWidth="1"
+                                        x="70.5"
+                                        y="9.5"
+                                        width="431"
+                                        height="279"/>
+                                </g>
+                                <path d="M70.5,288.5 L501.5,9.5" id="Line-Copy-3" stroke="#A6A6A6"/>
+                                <text
+                                    id="Very-high-High-Moder-Copy"
+                                    fontFamily="NotoSans-Bold, Noto Sans"
+                                    fontSize="12"
+                                    fontWeight="bold"
+                                    line-spacing="18"
+                                    fill="#4A4A4A">
+                                    <tspan x="1.688" y="42">
+                                        Very high
+                                    </tspan>
+                                    <tspan x="30.68" y="97">
+                                        High
+                                    </tspan>
+                                    <tspan x="0.572" y="152">
+                                        Moderate
+                                    </tspan>
+                                    <tspan x="13.22" y="207">
+                                        Limited
+                                    </tspan>
+                                    <tspan x="34.52" y="262">
+                                        Low
+                                    </tspan>
+                                </text>
+                                <text
+                                    id="Lower-Copy"
+                                    fontFamily="NotoSans-Bold, Noto Sans"
+                                    fontSize="12"
+                                    fontWeight="bold"
+                                    line-spacing="16"
+                                    fill="#4A4A4A">
+                                    <tspan x="96" y="309">
+                                        Lower
+                                    </tspan>
+                                </text>
+                                <text
+                                    id="In-line-with-inflati"
+                                    fontFamily="NotoSans-Bold, Noto Sans"
+                                    fontSize="12"
+                                    fontWeight="bold"
+                                    line-spacing="16"
+                                    fill="#4A4A4A">
+                                    <tspan x="167" y="309">
+                                        In line with
+                                    </tspan>
+                                    <tspan x="175.418" y="325">
+                                        inflation
+                                    </tspan>
+                                </text>
+                                <text
+                                    id="Marginally-ahead-of"
+                                    fontFamily="NotoSans-Bold, Noto Sans"
+                                    fontSize="12"
+                                    fontWeight="bold"
+                                    line-spacing="16"
+                                    fill="#4A4A4A">
+                                    <tspan x="254" y="309">
+                                        Marginally
+                                    </tspan>
+                                    <tspan x="260.144" y="325">
+                                        ahead of
+                                    </tspan>
+                                    <tspan x="260.636" y="341">
+                                        inflation
+                                    </tspan>
+                                </text>
+                                <text
+                                    id="Materially-ahead-of"
+                                    fontFamily="NotoSans-Bold, Noto Sans"
+                                    fontSize="12"
+                                    fontWeight="bold"
+                                    line-spacing="16"
+                                    fill="#4A4A4A">
+                                    <tspan x="342" y="309">
+                                        Materially
+                                    </tspan>
+                                    <tspan x="346.554" y="325">
+                                        ahead of{" "}
+                                    </tspan>
+                                    <tspan x="347.046" y="341">
+                                        inflation
+                                    </tspan>
+                                </text>
+                                <text
+                                    id="Maximised-to-target-Copy"
+                                    fontFamily="NotoSans-Bold, Noto Sans"
+                                    fontSize="12"
+                                    fontWeight="bold"
+                                    line-spacing="16"
+                                    fill="#4A4A4A">
+                                    <tspan x="428" y="309">
+                                        Maximised
+                                    </tspan>
+                                    <tspan x="433.85" y="325">
+                                        to target{" "}
+                                    </tspan>
+                                </text>
+                                <path
+                                    d="M71,37 L460,37 L460,289"
+                                    id="Path-3-Copy-5"
+                                    stroke="#A6A6A6"
+                                    strokeDasharray="1,3"/>
+                                <path
+                                    d="M71,93 L373,93 L373,289"
+                                    id="Path-3-Copy-6"
+                                    stroke="#A6A6A6"
+                                    strokeDasharray="1,3"/>
+                                <path
+                                    d="M71,149 L287,149 L287,289"
+                                    id="Path-3-Copy-7"
+                                    stroke="#A6A6A6"
+                                    strokeDasharray="1,3"/>
+                                <path
+                                    d="M71,205 L201,205 L201,289"
+                                    id="Path-3-Copy-8"
+                                    stroke="#A6A6A6"
+                                    strokeDasharray="1,3"/>
+                                <path
+                                    d="M71,261 L114,261 L114,289"
+                                    id="Path-3-Copy-9"
+                                    stroke="#A6A6A6"
+                                    strokeDasharray="1,3"/>
+                                <g
+                                    id="1"
+                                    onClick={this.onClick}
+                                    onMouseOver={this.onMouseOver}
+                                    onMouseOut={this.onMouseOut}>
+                                    <use
+                                        id="1"
+                                        fill={this.state.colours['1']}
+                                        fillRule="evenodd"
+                                        xlinkHref="#path-4"/>
+                                    <circle stroke="#002A5E" strokeWidth="1" cx="113" cy="261" r="17.5"/>
+                                </g>
+                                <g id="2" onClick={this.onClick}>
+                                    <use
+                                        id="2"
+                                        fill={this.state.colours['2']}
+                                        fillRule="evenodd"
+                                        xlinkHref="#path-3"/>
+                                    <circle stroke="#002A5E" strokeWidth="1" cx="201" cy="205" r="17.5"/>
+                                </g>
+                                <g id="3" onClick={this.onClick}>
+                                    <use
+                                        id="3"
+                                        fill={this.state.colours['3']}
+                                        fillRule="evenodd"
+                                        xlinkHref="#path-2"/>
+                                    <circle stroke="#002A5E" strokeWidth="1" cx="287" cy="149" r="17.5"/>
+                                </g>
+
+                                <g id="4" onClick={this.onClick}>
+                                    <use
+                                        id="4"
+                                        fill={this.state.colours['4']}
+                                        fillRule="evenodd"
+                                        xlinkHref="#path-5"/>
+                                    <circle stroke="#002A5E" strokeWidth="1" cx="373" cy="93" r="17.5"/>
+                                </g>
+                                <g id="5" onClick={this.onClick}>
+                                    <use
+                                        id="5"
+                                        fill={this.state.colours['5']}
+                                        fillRule="evenodd"
+                                        xlinkHref="#path-6"/>
+                                    <circle stroke="#002A5E" strokeWidth="1" cx="460" cy="37" r="17.5"/>
+                                </g>
+                                <text
+                                    id="Potential-return"
+                                    fontFamily="SchrodersCircularTT-Bold, Schroders Circular TT"
+                                    fontSize="16"
+                                    fontWeight="bold"
+                                    fill="#002A5E">
+                                    <tspan x="227.188" y="277">
+                                        Potential return
+                                    </tspan>
+                                </text>
+                                <text
+                                    id="Risk"
+                                    transform="translate(88.500000, 150.500000) rotate(-90.000000) translate(-88.500000, -150.500000) "
+                                    fontFamily="SchrodersCircularTT-Bold, Schroders Circular TT"
+                                    fontSize="16"
+                                    fontWeight="bold"
+                                    fill="#002A5E">
+                                    <tspan x="73.076" y="156">
+                                        Risk
+                                    </tspan>
+                                </text>
+                                <text
+                                    id=" "
+                                    fontFamily="FontAwesome"
+                                    fontSize="16"
+                                    fontWeight="normal"
+                                    fill="#14E6F1">
+                                    <tspan x="365" y="98">&#xf040;</tspan>
+                                </text>
+                                {this.state.showToolTip && <g id="Group-2" transform="translate(100.000000, 0.000000)">
+                                    <g id="Group-7">
+                                        <g id="Rectangle-7">
+                                            <use fill="black" fillOpacity="1" filter="url(#filter-8)" xlinkHref="#path-7"/>
+                                            <use fill="#FFFFFF" fillRule="evenodd" xlinkHref="#path-7"/>
+                                        </g>
+                                    </g>
+                                    <text
+                                        id="We-have-pre-filled-s"
+                                        fontFamily="NotoSans-Regular, Noto Sans"
+                                        fontSize="12"
+                                        fontWeight="normal"
+                                        fill="#4A4A4A">
+                                        <tspan x="16" y="20">
+                                            LOrem ipswum
+                                        </tspan>
+                                        <tspan x="16" y="37">
+                                            order to grow my assets materially ahead of{" "}
+                                        </tspan>
+                                        <tspan x="16" y="54">
+                                            inflation over the medium to long term
+                                        </tspan>
+                                    </text>
+                                </g>}
+                            </g>
+                        </g>
+                    </g>
+                </svg>
