@@ -6,6 +6,7 @@ import FormContainer from './containers/form-container';
 import Sync from './forms/sync';
 
 import Svg from './components/svg';
+import Slider from './components/slider';
 
 const store = configureStore();
 
@@ -50,6 +51,7 @@ export default class Root extends Component {
                                 <Route exact path="/" component={FormContainer}/>
                                 <Route exact path="/sync" component={Sync}/>
                                 <Route exact path="/svg" render= {()=> <Svg items={items} selectedRisk={3}/>}/>
+                                <Route exact path="/slider" render= {()=> <Slider selectedValue={3}/>}/>
 
                             </Switch>
                         </div>
