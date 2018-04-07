@@ -1,6 +1,7 @@
-import React, {Component} from 'react'
-import {Field, reduxForm} from 'redux-form'
+import React, { Component } from 'react'
+import { Field, reduxForm } from 'redux-form'
 import './form.css';
+import SegmentedControl from '../components/segmentedControl';
 
 const required = value => (value
     ? undefined
@@ -16,13 +17,13 @@ const renderField = ({
         warning
     }
 }) => (
-    <div>
-        <label>{label}</label>
         <div>
-            <input {...input} placeholder={label} type={type}/> {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
+            <label>{label}</label>
+            <div>
+                <input {...input} placeholder={label} type={type} /> {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
+            </div>
         </div>
-    </div>
-)
+    )
 
 class FieldLevelValidationForm extends Component {
 
@@ -31,7 +32,7 @@ class FieldLevelValidationForm extends Component {
     };
 
     render() {
-        const {handleSubmit, pristine, reset, submitting, clearSubmitErrors} = this.props;
+        const { handleSubmit, pristine, reset, submitting, clearSubmitErrors } = this.props;
         return (
             <form className='container' onSubmit={handleSubmit(this.submit)}>
 
@@ -40,15 +41,34 @@ class FieldLevelValidationForm extends Component {
                     type="text"
                     component={renderField}
                     label="Field 1"
-                    validate={[required]}/>
+                    validate={[required]} />
                 <Field
                     name="field2"
                     type="text"
                     component={renderField}
                     label="Field 2"
-                    validate={[required]}/>
+                    validate={[required]} />
 
-                <br/>
+                <br />
+
+                <Field
+                    name="gender"
+                    component={SegmentedControl}
+                    heading="What is your gender?"
+                    items={
+                        [
+                            {
+                                label: 'Female',
+                                value: 'female',
+                            },
+                            {
+                                label: 'Male',
+                                value: 'male',
+                            },
+                        ]
+                    }
+                    validate={[required]}
+                />
 
                 <div>
                     <button type="submit">Submit</button>

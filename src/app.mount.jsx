@@ -6,6 +6,7 @@ import {createStore} from 'redux';
 import rootReducer from './reducers/index';
 import Root from './appJourney.root';
 
+import './styles/main.scss';
 const store = createStore(rootReducer);
 
 

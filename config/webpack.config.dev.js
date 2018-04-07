@@ -12,6 +12,9 @@ const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
 
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+const extractPlugin = new ExtractTextPlugin({ filename: './assets/css/app.css' });
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
 const publicPath = '/';
@@ -149,6 +152,28 @@ module.exports = {
               cacheDirectory: true,
             },
           },
+          // sass-loader with sourceMap activated
+          {
+            test: /\.scss$/,
+            include: [path.resolve(__dirname, 'src', 'assets', 'scss','styles')],
+            use: extractPlugin.extract({
+              use: [
+                {
+                  loader: 'css-loader',
+                  options: {
+                    sourceMap: true
+                  }
+                },
+                {
+                  loader: 'sass-loader',
+                  options: {
+                    sourceMap: true
+                  }
+                }
+              ],
+              fallback: 'style-loader'
+            })
+          },
           // "postcss" loader applies autoprefixer to our CSS.
           // "css" loader resolves paths in CSS and adds assets as dependencies.
           // "style" loader turns CSS into JS modules that inject <style> tags.
@@ -160,6 +185,12 @@ module.exports = {
               require.resolve('style-loader'),
               {
                 loader: require.resolve('css-loader'),
+                options: {
+                  importLoaders: 1
+                },
+              },
+              {
+                loader: require.resolve('sass-loader'),
                 options: {
                   importLoaders: 1
                 },
@@ -219,6 +250,8 @@ module.exports = {
       inject: true,
       template: paths.appHtml,
     }),
+   
+    extractPlugin,
     // Add module names to factory functions so they appear in browser profiler.
     new webpack.NamedModulesPlugin(),
     // Makes some environment variables available to the JS code, for example:

@@ -1,0 +1,14 @@
+@font-face {
+    font-family: Inconsolta-Bold;
+    src: url('../assets/fonts/Inconsolata-Bold.ttf') format('ttf');
+}
+
+@font-face {
+    font-family: Inconsolta-Regular;
+    src: url('../assets/fonts/Inconsolata-Regular.ttf') format('ttf');
+}
+
+body {
+    font-family: Inconsolta-Regular;
+    background-color: beige;
+}

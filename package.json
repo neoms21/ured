@@ -101,6 +101,9 @@
     "extends": "react-app"
   },
   "devDependencies": {
-    "redux-devtools-extension": "^2.13.2"
+    "clean-webpack-plugin": "^0.1.19",
+    "node-sass": "^4.8.3",
+    "redux-devtools-extension": "^2.13.2",
+    "sass-loader": "^6.0.7"
   }
 }
