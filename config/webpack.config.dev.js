@@ -133,11 +133,14 @@ module.exports = {
           // A missing `test` is equivalent to a match.
           {
             test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-            loader: require.resolve('url-loader'),
-            options: {
-              limit: 10000,
-              name: 'static/media/[name].[hash:8].[ext]',
-            },
+            use: [
+    'file-loader?name=assets/img/[name].[ext]'
+  ]
+            // loader: require.resolve('url-loader'),
+            // options: {
+            //   limit: 10000,
+            //   name: 'static/media/[name].[hash:8].[ext]',
+            // },
           },
           // Process JS with Babel.
           {
@@ -161,13 +164,15 @@ module.exports = {
                 {
                   loader: 'css-loader',
                   options: {
-                    sourceMap: true
+                    sourceMap: true,
+                    modules:true,
                   }
                 },
                 {
                   loader: 'sass-loader',
                   options: {
-                    sourceMap: true
+                    sourceMap: true,
+                    modules:true,
                   }
                 }
               ],
@@ -186,7 +191,8 @@ module.exports = {
               {
                 loader: require.resolve('css-loader'),
                 options: {
-                  importLoaders: 1
+                  importLoaders: 1,
+                  modules:true,
                 },
               },
               {

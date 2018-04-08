@@ -37,7 +37,7 @@ const SegmentedControl = ({ input, disabled, heading, required, className, items
 
 SegmentedControl.propTypes = {
     input: PropTypes.object.isRequired,
-    name: PropTypes.string.isRequired,
+   // name: PropTypes.string.isRequired,
     className: PropTypes.string,
     items: PropTypes.arrayOf(PropTypes.shape({
         label: PropTypes.string.isRequired,
