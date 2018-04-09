@@ -1,0 +1,23 @@
+.container {
+	display: flex;
+	flex-direction: column;
+
+	margin-top: 50px;
+}
+
+.result {
+    /* background: linear-gradient(90deg, rgb(45, 85, 178) 28%, white 62%); */
+    border: solid 1px lightgray;
+	height: 30px;
+	width: 100%;
+}
+.indicators {
+	display: flex;
+}
+
+.left {
+	flex: 1;
+}
+
+
+/* background: linear-gradient(270deg, rgba(45, 85, 178, 0) 0%, #2D55B2 30.26%, #2D55B2 67.84%, #2D55B2 100%); */
