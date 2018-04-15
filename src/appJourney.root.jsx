@@ -9,6 +9,15 @@ import Svg from './components/svg';
 import Slider from './components/slider';
 import Header from './components/header';
 
+
+// import fontawesome from '@fortawesome/fontawesome'
+// import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+// import brands from '@fortawesome/fontawesome-free-brands'
+// import faCheckSquare from '@fortawesome/fontawesome-free-solid/faCheckSquare'
+// import faCoffee from '@fortawesome/fontawesome-free-solid/faCoffee'
+
+// fontawesome.library.add(brands, faCheckSquare, faCoffee);
+
 const store = configureStore();
 
 const items = [
