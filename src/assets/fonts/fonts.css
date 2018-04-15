@@ -1,0 +1,9 @@
+
+@font-face {
+    font-family: Inconsolta-Regular;
+    src: url('./Inconsolata-Regular.eot?#iefix') format('embedded-opentype'), 
+    url('./Inconsolata-Regular.eot'), 
+    url('./Inconsolata-Regular.woff') format('woff'), 
+    url('./Inconsolata-Regular.ttf') format('truetype'), 
+    url('./Inconsolata-Regular.svg#svgFontName') format('svg')
+}
