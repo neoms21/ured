@@ -24,10 +24,22 @@ class Volume extends Component {
 			left: e.currentTarget.offsetLeft - 7
 		});
 	};
+
 	handleImageClick = () => {
 		this.setState({
 			left: '40px'
 		});
+	};
+
+	itemClick = (e) => {
+		this.setState({
+			other: {
+				left: e.currentTarget.offsetLeft + e.target.getBoundingClientRect().width / 2.4,
+				top: e.target.getBoundingClientRect().height
+			}
+		});
+		console.log(e.currentTarget.offsetLeft);
+		console.log(e.currentTarget.getBoundingClientRect());
 	};
 
 	render() {
@@ -60,20 +72,27 @@ class Volume extends Component {
 					{step('4', this.handleOnChange, 'Medium to high')}
 					{step('5', this.handleOnChange, 'High', styles['last-step'])}
 				</div>
-
-				<AttitudeResult
-					heading="Investment Risk"
-					leftLabel="Left"
-					rightLabel="right"
-					gradients={[ 'rgb(45, 85, 178) 28%', 'white 62%' ]}
-				/>
-
-				<AttitudeResult
-					heading="Blah Blah"
-					leftLabel="Left"
-					rightLabel="right"
-					gradients={[ 'red', 'yellow','green' ]}
-				/>
+				<div className="row">
+					<div className="col-lg-6">
+						<div className={styles.list}>
+							<div className={styles.listitem} onClick={this.itemClick}>
+								One
+							</div>
+							<div className={styles.listitem} onClick={this.itemClick}>
+								two
+							</div>
+							<div className={styles.listitem} onClick={this.itemClick}>
+								three
+							</div>
+							<div className={styles.listitem} onClick={this.itemClick}>
+								four
+							</div>
+							<div style={{ ...this.state.other }} className={styles.other}>
+								five
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		);
 	}
