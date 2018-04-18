@@ -1,14 +1,6 @@
-@font-face {
-    font-family: Inconsolta-Bold;
-    src: url('../assets/fonts/Inconsolata-Bold.ttf') format('ttf');
-}
-
-@font-face {
-    font-family: Inconsolta-Regular;
-    src: url('../assets/fonts/Inconsolata-Regular.ttf') format('ttf');
-}
+@import '../assets/fonts/fonts.css';
 
 body {
     font-family: Inconsolta-Regular;
-    background-color: beige;
+    background-color: bisque;
 }
