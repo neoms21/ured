@@ -37,27 +37,35 @@ const currencies = [
   }
 ];
 describe("Bank accounts reducer tests", () => {
-  it("should show the correct display fields for UK, GBP currency", () => {
+  it.only("should show the correct display fields for UK, GBP currency", () => {
     const result = reducer(
-      {},
+      { accounts: [{ fields: {} }] },
       {
         type: SELECT_DISPLAY_FIELDS,
         payload: {
           currencies: currencies,
           isUkBankAccount: true,
-          currencyId: 1
+          currencyId: 1,
+          index: 1
         }
       }
     );
 
-    expect(result.displayFields).toEqual([
-      "bankAccountProvider",
-      "bankAccountName",
-      "bankAccountSortCode",
-      "bankAccountNumber",
-      "bankAccountBuildingSocietyReference",
-      "bankAccountIBAN"
-    ]);
+    expect(result).toEqual({
+      accounts: [
+        {
+          displayFields: [
+            "bankAccountProvider",
+            "bankAccountName",
+            "bankAccountSortCode",
+            "bankAccountNumber",
+            "bankAccountBuildingSocietyReference",
+            "bankAccountIBAN"
+          ],
+          fields: {}
+        }
+      ]
+    });
   });
 
   it("should show the correct display fields for UK, Non GBP currency", () => {
@@ -158,7 +166,16 @@ describe("Bank accounts reducer tests", () => {
         payload: {
           accounts: {
             data: {},
-            schema: { isUKBankAccount: {}, bankAccountCurrency: {} }
+            schema: {
+              isUKBankAccount: {},
+              bankAccountCurrency: {},
+              bankAccountProvider: {},
+              bankAccountSortCode: {},
+              bankAccountName: {},
+              bankAccountBuildingSocietyReference: {},
+              bankAccountNumber: {},
+              bankAccountIBAN: {}
+            }
           },
           currencies: currencies
         }
@@ -167,14 +184,57 @@ describe("Bank accounts reducer tests", () => {
 
     expect(result).toEqual({
       dataLoaded: true,
-      fieldNames: ["isUKBankAccount", "bankAccountCurrency"],
-      fields: {
-        bankAccountCurrency: { key: "bankAccountCurrency", value: 1 },
-        isUKBankAccount: { key: "isUKBankAccount", value: true }
-      },
-      lists: {},
+      accounts: [
+        {
+          fields: {
+            isUKBankAccount1: { key: "isUKBankAccount1", value: true },
+            bankAccountCurrency1: { key: "bankAccountCurrency1", value: 1 },
+            bankAccountProvider1: {
+              key: "bankAccountProvider1",
+              value: undefined
+            },
+            bankAccountName1: { key: "bankAccountName1", value: undefined },
+            bankAccountSortCode1: {
+              key: "bankAccountSortCode1",
+              value: undefined
+            },
+            bankAccountNumber1: {
+              key: "bankAccountNumber1",
+              value: undefined
+            },
+            bankAccountBuildingSocietyReference1: {
+              key: "bankAccountBuildingSocietyReference1",
+              value: undefined
+            },
+            bankAccountIBAN1: {
+              key: "bankAccountIBAN1",
+              value: undefined
+            }
+          },
+          entityId: undefined
+        }
+      ],
+      fieldNames: [
+        "isUKBankAccount",
+        "bankAccountCurrency",
+        "bankAccountProvider",
+        "bankAccountSortCode",
+        "bankAccountName",
+        "bankAccountBuildingSocietyReference",
+        "bankAccountNumber",
+        "bankAccountIBAN"
+      ],
       saved: undefined,
-      schema: { bankAccountCurrency: {}, isUKBankAccount: {} },
+      schema: {
+        isUKBankAccount: {},
+        bankAccountCurrency: {},
+        bankAccountProvider: {},
+        bankAccountName: {},
+        bankAccountSortCode: {},
+        bankAccountBuildingSocietyReference: {},
+        bankAccountNumber: {},
+        bankAccountIBAN: {}
+      },
       displayFields: [
         "bankAccountProvider",
         "bankAccountName",
@@ -182,7 +242,8 @@ describe("Bank accounts reducer tests", () => {
         "bankAccountNumber",
         "bankAccountBuildingSocietyReference",
         "bankAccountIBAN"
-      ]
+      ],
+      repetitions: 1
     });
   });
 });

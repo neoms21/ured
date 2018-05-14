@@ -1,16 +1,23 @@
 import React, { Component } from "react";
 
 import formStyles from "../../sass/forms.scss";
-import { Field } from "redux-form";
-import LinearDropdown from "./../../components/fields/linear-dropdown";
-import CountrySelectOption from "../../components/fields/country-option";
-import CountryValueOption from "../../components/fields/country-value";
-import CountrySelectField from "../../components/fields/country-select-field";
-import { requiredSelectItem } from "../../validators/required_select_value";
-import TextField from "../../components/redux-form-fields/Textfield";
-import SortCode from "../../components/redux-form-fields/form-sortcode-field";
+
+import SubmitGroup from "../common/buttons/submit-group";
+import BankAccount from "./bank-account";
 
 class BankAccounts extends Component {
+  save = values => {
+    this.props.saveForm(values);
+  };
+
+  submit = values => {
+    this.save(values);
+  };
+
+  saveInvalidFormAndContinue = () => {
+    this.save(this.props.formValues);
+  };
+
   componentDidMount() {
     this.props.setSubHeader();
 
@@ -18,6 +25,14 @@ class BankAccounts extends Component {
       this.props.fetchRefData();
     }
   }
+
+  addBankAccount = () => {
+    this.props.addBankAccount(this.props.formValues, this.props.currencies);
+  };
+
+  removeBankAccount = index => {
+    this.props.removeBankAccount(index, this.props.formValues);
+  };
 
   componentWillReceiveProps(nextState) {
     if (
@@ -29,46 +44,34 @@ class BankAccounts extends Component {
     }
   }
 
-  renderField = fieldName => (
-    <div key={fieldName} className="row">
-      {fieldName === "bankAccountSortCode" ? (
-        <SortCode
-          classNames="col-lg-6 col-md-8 col-sm-8 col-xs-12"
-          fields={this.props.fields}
-          fieldName={fieldName}
-        />
-      ) : (
-        <TextField
-          classNames="col-lg-6 col-md-8 col-sm-8 col-xs-12"
-          fields={this.props.fields}
-          fieldName={fieldName}
-          isMixed={
-            this.props.relatedFields &&
-            this.props.relatedFields.indexOf(fieldName) !== -1
-          }
-        />
-      )}
-    </div>
-  );
-
-  handleCurrencyChange = item => {
+  handleCurrencyChange = (item, index) => {
     this.props.selectDisplayFields(
       this.props.currencies,
       item.id,
-      this.props.formValues.isUKBankAccount
+      this.props.formValues[`isUKBankAccount${index}`],
+      index
     );
   };
 
-  handleUKAccountChanged = item => {
+  handleUKAccountChange = (item, index) => {
     this.props.selectDisplayFields(
       this.props.currencies,
-      this.props.formValues.bankAccountCurrency,
-      item.id
+      this.props.formValues[`bankAccountCurrency${index}`],
+      item.id,
+      index
     );
   };
 
   render() {
-    const { currencies, fields, loadComplete, displayFields } = this.props;
+    const {
+      handleSubmit,
+      currencies,
+      accounts,
+      loadComplete,
+      relatedFields,
+      reps
+    } = this.props;
+
     return (
       <div>
         <h2>Bank accounts</h2>
@@ -78,36 +81,38 @@ class BankAccounts extends Component {
           to different accounts you can add further accounts and specify
           payments to these in the mandates section.
         </p>
+
         {loadComplete && (
-          <div>
-            <Field
-              label={fields["isUKBankAccount"].label}
-              name="isUKBankAccount"
-              items={[{ id: true, value: "Yes" }, { id: false, value: "No" }]}
-              showOther={false}
-              selectedItem={fields.isUKBankAccount.value}
-              component={LinearDropdown}
-              errorText={fields.isUKBankAccount.validation}
-              helpText={fields.isUKBankAccount.helpText}
-              onSelect={this.handleUKAccountChanged}
+          <form onSubmit={handleSubmit(this.submit)}>
+            <div>
+              {accounts.map((a, i) => (
+                <BankAccount
+                  key={`bankAccount${i}`}
+                  fields={a.fields}
+                  index={i + 1}
+                  displayFields={a.displayFields}
+                  currencies={currencies}
+                  relatedFields={relatedFields}
+                  handleCurrencyChange={this.handleCurrencyChange}
+                  handleUKAccountChange={this.handleUKAccountChange}
+                  showAdd={i + 1 < this.props.maxRepeats}
+                  onAddClick={this.addBankAccount}
+                  onRemoveClick={() => this.removeBankAccount(i + 1)}
+                  repetitions={reps}
+                />
+              ))}
+            </div>
+            <SubmitGroup
+              errors={this.props.errors}
+              fields={this.props.fields}
+              savePartial={this.saveInvalidFormAndContinue}
+              clearErrors={() => {
+                this.props.reset("dependants");
+              }}
+              formValues={this.props.formValues}
+              onSkipClick={() => this.props.history.push("/dashboard")}
             />
-
-            <Field
-              label={fields["bankAccountCurrency"].label}
-              helpText={fields["bankAccountCurrency"].helpText}
-              name="bankAccountCurrency"
-              options={currencies}
-              selectedCountry={fields["bankAccountCurrency"].value}
-              optionComponent={CountrySelectOption}
-              valueComponent={CountryValueOption}
-              component={CountrySelectField}
-              errorText={fields["bankAccountCurrency"].validation}
-              validate={[requiredSelectItem]}
-              onSelectionChange={this.handleCurrencyChange}
-            />
-
-            {displayFields.map(d => this.renderField(d))}
-          </div>
+          </form>
         )}
       </div>
     );

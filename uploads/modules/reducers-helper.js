@@ -132,7 +132,7 @@ export const addListItem = (state, action, listName) => {
       };
     });
 
-    resultantList.push({ fields: objFields });
+    resultantList.push({ ...state[listName][i], fields: objFields });
   }
 
   return {

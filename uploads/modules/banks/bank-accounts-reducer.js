@@ -1,14 +1,22 @@
 import {
   FETCH_ACCOUNTS_SUCCESS,
-  SELECT_DISPLAY_FIELDS
+  SELECT_DISPLAY_FIELDS,
+  ADD_BANK_ACCOUNT,
+  REMOVE_BANK_ACCOUNT
 } from "./bank-accounts-action-types";
-import { assignFields, assignListFields } from "./../reducers-helper";
+import {
+  assignFields,
+  assignListFields,
+  addListItem,
+  removeListItem
+} from "./../reducers-helper";
 
 const initialState = {
   fieldNames: [],
   fields: {},
   dataLoaded: false,
   maxRepeats: 2,
+  accounts: [],
   displayFields: [],
   relatedFields: ["bankBicCode", "bankAbaFedwire"]
 };
@@ -16,63 +24,116 @@ const initialState = {
 export default function about(state = initialState, action = "") {
   switch (action.type) {
     case FETCH_ACCOUNTS_SUCCESS: {
-      console.log(
-        assignListFields(
-          state,
-          { payload: action.payload.accounts },
-          "accounts", true
-        )
+      const { data } = action.payload.accounts;
+
+      const assignedFieldsState = assignListFields(
+        state,
+        { payload: action.payload.accounts },
+        "accounts",
+        true
       );
-      const assignedFieldsState = assignFields(state, {
-        payload: action.payload.accounts
-      });
+      if (data.accounts && data.accounts.length > 0) {
+        return { ...assignedFieldsState, displayFields: [] };
+      } else {
+        const ukCurrency = action.payload.currencies.find(
+          c => c.currencyCode.toLowerCase() === "gbp"
+        );
+        const currency =
+          assignedFieldsState.accounts[0].fields.bankAccountCurrency1.value ===
+          undefined
+            ? ukCurrency.id
+            : assignedFieldsState.accounts[0].fields.bankAccountCurrency1.value;
 
-      const ukCurrency = action.payload.currencies.find(
-        c => c.currencyCode.toLowerCase() === "gbp"
-      );
-      const isUkAccount =
-        assignedFieldsState.fields.isUKBankAccount.value === undefined
-          ? true
-          : assignedFieldsState.fields.isUKBankAccount.value;
-
-      const currency =
-        assignedFieldsState.fields.bankAccountCurrency.value === undefined
-          ? ukCurrency.id
-          : assignedFieldsState.fields.bankAccountCurrency.value;
-
-      const newBankAccountField = {
-        ...assignedFieldsState.fields.isUKBankAccount,
-        value: isUkAccount
-      };
-      const newCurrency = {
-        ...assignedFieldsState.fields.bankAccountCurrency,
-        value: currency
-      };
-
-      return {
-        ...assignedFieldsState,
-        fields: {
-          ...assignedFieldsState.fields,
-          isUKBankAccount: { ...newBankAccountField },
-          bankAccountCurrency: { ...newCurrency }
-        },
-        displayFields: getDisplayFields(
+        const newFields = {
+          ...assignedFieldsState.accounts[0].fields,
+          isUKBankAccount1: {
+            ...assignedFieldsState.accounts[0].fields["isUKBankAccount1"],
+            value: true
+          },
+          bankAccountCurrency1: {
+            ...assignedFieldsState.accounts[0].fields["bankAccountCurrency1"],
+            value: currency
+          }
+        };
+        assignedFieldsState.accounts[0].fields = { ...newFields };
+        assignedFieldsState.accounts[0].displayFields = getDisplayFields(
           action.payload.currencies,
-          isUkAccount,
+          true,
           currency
-        )
-      };
+        );
+
+        return {
+          ...assignedFieldsState,
+          accounts: [...assignedFieldsState.accounts]
+        };
+      }
     }
 
     case SELECT_DISPLAY_FIELDS: {
-      const { currencies, isUkBankAccount, currencyId } = action.payload;
+      const { currencies, isUkBankAccount, currencyId, index } = action.payload;
+      console.log(currencies, isUkBankAccount, currencyId, index);
+      const accToUpdate = state.accounts[index - 1];
+
+      const displayFields = getDisplayFields(
+        currencies,
+        isUkBankAccount,
+        currencyId
+      );
+      console.log(accToUpdate);
+      console.log({
+        ...state,
+        accounts: [
+          ...state.accounts.slice(0, index - 1),
+          { ...accToUpdate, displayFields: displayFields },
+          ...state.accounts.slice(index)
+        ]
+      });
 
       return {
         ...state,
-        displayFields: getDisplayFields(currencies, isUkBankAccount, currencyId)
+        accounts: [
+          ...state.accounts.slice(0, index - 1),
+          { ...accToUpdate, displayFields: displayFields },
+          ...state.accounts.slice(index)
+        ]
       };
     }
 
+    case ADD_BANK_ACCOUNT: {
+      const newState = addListItem(
+        state,
+        { payload: { currentValues: action.payload.currentValues } },
+        "accounts"
+      );
+      
+      const ukCurrency = action.payload.currencies.find(
+        c => c.currencyCode.toLowerCase() === "gbp"
+      );
+
+      const newFields = {
+        ...newState.accounts[1].fields,
+        isUKBankAccount2: {
+          ...newState.accounts[1].fields["isUKBankAccount2"],
+          value: true
+        },
+        bankAccountCurrency2: {
+          ...newState.accounts[1].fields["bankAccountCurrency2"],
+          value: ukCurrency.id
+        }
+      };
+      newState.accounts[1].fields = { ...newFields };
+      newState.accounts[1].displayFields = getDisplayFields(
+        action.payload.currencies,
+        true,
+        ukCurrency.id
+      );
+
+      return newState;
+    }
+
+    case REMOVE_BANK_ACCOUNT: {
+      return removeListItem(state, action, "accounts");
+    }
     default:
       return state;
   }
@@ -81,7 +142,7 @@ export default function about(state = initialState, action = "") {
     const currency = currencies.find(c => c.id === currencyId);
     var newDisplayFields = [];
 
-    if (!currency) return state;
+    if (!currency) return state.displayFields;
 
     if (isUkBankAccount && currency.currencyCode.toLowerCase() === "gbp") {
       newDisplayFields = [
