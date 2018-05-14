@@ -17,12 +17,19 @@ class BankAccounts extends Component {
     if (!this.props.currencies || this.props.currencies.length === 0) {
       this.props.fetchRefData();
     }
-    if (!this.props.loadComplete) {
-      this.props.fetchAccounts();
+  }
+
+  componentWillReceiveProps(nextState) {
+    if (
+      nextState.currencies &&
+      nextState.currencies.length > 0 &&
+      !nextState.loadComplete
+    ) {
+      this.props.fetchAccounts(nextState.currencies);
     }
   }
 
-  renderTextField = fieldName => (
+  renderField = fieldName => (
     <div key={fieldName} className="row">
       {fieldName === "bankAccountSortCode" ? (
         <SortCode
@@ -99,7 +106,7 @@ class BankAccounts extends Component {
               onSelectionChange={this.handleCurrencyChange}
             />
 
-            {displayFields.map(d => this.renderTextField(d))}
+            {displayFields.map(d => this.renderField(d))}
           </div>
         )}
       </div>

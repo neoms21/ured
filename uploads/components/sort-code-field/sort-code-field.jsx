@@ -50,19 +50,22 @@ export default class SortCodeField extends Component {
 
     this.propogateToForm(newState, isError);
 
-    if (value.length === 2 && nextId && this[nextId] && !isError) this[nextId].focus();
+    if (value.length === 2 && nextId && this[nextId] && !isError)
+      this[nextId].focus();
   };
 
-  propogateToForm = (state, error) => {
-    const combinedValue = Object.values(
+  combinedValue = state => {
+    return Object.values(
       _.mapValues(state, function(o) {
         return o.value;
       })
     ).join("");
+  };
 
-    if (error || combinedValue.length === 6) {
-      this.props.input.onBlur(combinedValue);
-      this.props.input.onChange(combinedValue);
+  propogateToForm = (state, error) => {
+    if (error || this.combinedValue(state).length === 6) {
+      this.props.input.onBlur(this.combinedValue(state));
+      this.props.input.onChange(this.combinedValue(state));
     }
   };
 
@@ -88,11 +91,10 @@ export default class SortCodeField extends Component {
             id="sc1"
             maxLength={maxLength}
             className={` ${styles["sort-code-input"]} ${
-              this.state.sc1.error ? "input-error" : ""
+              this.state.sc1.error || (touched && !this.combinedValue(this.state)) ? "input-error" : ""
             }`}
             value={this.state.sc1.value}
             onChange={e => this.handleChange(e, "sc2")}
-           
           />{" "}
           <div className={styles.separator} />
           <input
@@ -100,11 +102,10 @@ export default class SortCodeField extends Component {
             ref={cntr => (this.sc2 = cntr)}
             maxLength={maxLength}
             className={`${styles["sort-code-input"]} ${
-              this.state.sc2.error ? "input-error" : ""
+              this.state.sc2.error || (touched && !this.combinedValue(this.state)) ? "input-error" : ""
             }`}
             value={this.state.sc2.value}
             onChange={e => this.handleChange(e, "sc3")}
-           
           />{" "}
           <div className={styles.separator} />
           <input
@@ -112,19 +113,16 @@ export default class SortCodeField extends Component {
             ref={cntr => (this.sc3 = cntr)}
             maxLength={maxLength}
             className={`${styles["sort-code-input"]} ${
-              this.state.sc3.error ? "input-error" : ""
+              this.state.sc3.error || (touched && !this.combinedValue(this.state))? "input-error" : ""
             }`}
             value={this.state.sc3.value}
             onChange={this.handleChange}
-          
           />
         </div>
-        {touched &&
-          error && (
-            <div className={`form-error`}>
-              {error && typeof error === "string" ? error : errorText}
-            </div>
-          )}
+        {((touched && error) ||
+          (touched && !this.combinedValue(this.state))) && (
+          <div className={`form-error`}>{errorText}</div>
+        )}
       </div>
     );
   }

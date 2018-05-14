@@ -1,5 +1,8 @@
 import reducer from "./bank-accounts-reducer";
-import { SELECT_DISPLAY_FIELDS } from "./bank-accounts-action-types";
+import {
+  SELECT_DISPLAY_FIELDS,
+  FETCH_ACCOUNTS_SUCCESS
+} from "./bank-accounts-action-types";
 const currencies = [
   {
     code: "INR",
@@ -145,5 +148,41 @@ describe("Bank accounts reducer tests", () => {
       "bankAbaFedwire",
       "bankAccountIBAN"
     ]);
+  });
+
+  it("should select default value for currency and uk bank account question", () => {
+    const result = reducer(
+      {},
+      {
+        type: FETCH_ACCOUNTS_SUCCESS,
+        payload: {
+          accounts: {
+            data: {},
+            schema: { isUKBankAccount: {}, bankAccountCurrency: {} }
+          },
+          currencies: currencies
+        }
+      }
+    );
+
+    expect(result).toEqual({
+      dataLoaded: true,
+      fieldNames: ["isUKBankAccount", "bankAccountCurrency"],
+      fields: {
+        bankAccountCurrency: { key: "bankAccountCurrency", value: 1 },
+        isUKBankAccount: { key: "isUKBankAccount", value: true }
+      },
+      lists: {},
+      saved: undefined,
+      schema: { bankAccountCurrency: {}, isUKBankAccount: {} },
+      displayFields: [
+        "bankAccountProvider",
+        "bankAccountName",
+        "bankAccountSortCode",
+        "bankAccountNumber",
+        "bankAccountBuildingSocietyReference",
+        "bankAccountIBAN"
+      ]
+    });
   });
 });

@@ -24,7 +24,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchAccounts: () => dispatch(fetchAccounts("bank-accounts-1")),
+    fetchAccounts: (currencies) => dispatch(fetchAccounts("bank-accounts-1", currencies)),
     fetchRefData: () => dispatch(fetchRefData(["currencies"])),
     selectDisplayFields: (currencies, currencyId, isUkAccount) => {
       dispatch(selectDisplayFields(currencies, currencyId, isUkAccount));
