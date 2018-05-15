@@ -27,7 +27,6 @@ let HOCForm = (
 
     submit = values => {
       console.log(values);
-return;
       let newValues = { ...values };
       if (objToSave) {
         const res = {};

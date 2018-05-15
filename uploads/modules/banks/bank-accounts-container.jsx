@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import { setSubHeader } from "../../actions/actions";
+import HocForm from "./../common/hoc/hoc-form";
 import HOCWithoutForm from "./../common/hoc/hoc-without-form";
 import BankAccounts from "./bank-accounts";
 import { reduxForm, getFormValues } from "redux-form";
@@ -46,12 +47,10 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const selector = formValueSelector(PAGE_KEY);
-
 const BankAccountsContainer = reduxForm({
   form: PAGE_KEY,
   enableReinitialize: true
-})(HOCWithoutForm(BankAccounts, PAGE_KEY, "/dashboard/"));
+})(HocForm(BankAccounts, PAGE_KEY, "/dashboard/"));
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   BankAccountsContainer

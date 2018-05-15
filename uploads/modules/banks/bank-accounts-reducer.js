@@ -25,7 +25,7 @@ export default function about(state = initialState, action = "") {
   switch (action.type) {
     case FETCH_ACCOUNTS_SUCCESS: {
       const { data } = action.payload.accounts;
-
+      console.log(Object.keys(action.payload.accounts.schema));
       const assignedFieldsState = assignListFields(
         state,
         { payload: action.payload.accounts },
@@ -71,7 +71,7 @@ export default function about(state = initialState, action = "") {
 
     case SELECT_DISPLAY_FIELDS: {
       const { currencies, isUkBankAccount, currencyId, index } = action.payload;
-      console.log(currencies, isUkBankAccount, currencyId, index);
+
       const accToUpdate = state.accounts[index - 1];
 
       const displayFields = getDisplayFields(
@@ -105,7 +105,7 @@ export default function about(state = initialState, action = "") {
         { payload: { currentValues: action.payload.currentValues } },
         "accounts"
       );
-      
+
       const ukCurrency = action.payload.currencies.find(
         c => c.currencyCode.toLowerCase() === "gbp"
       );

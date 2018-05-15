@@ -1,22 +1,10 @@
 import React, { Component } from "react";
 
 import formStyles from "../../sass/forms.scss";
-
-import SubmitGroup from "../common/buttons/submit-group";
 import BankAccount from "./bank-account";
 
 class BankAccounts extends Component {
-  save = values => {
-    this.props.saveForm(values);
-  };
 
-  submit = values => {
-    this.save(values);
-  };
-
-  saveInvalidFormAndContinue = () => {
-    this.save(this.props.formValues);
-  };
 
   componentDidMount() {
     this.props.setSubHeader();
@@ -83,7 +71,7 @@ class BankAccounts extends Component {
         </p>
 
         {loadComplete && (
-          <form onSubmit={handleSubmit(this.submit)}>
+          // <form onSubmit={handleSubmit(this.submit)}>
             <div>
               {accounts.map((a, i) => (
                 <BankAccount
@@ -102,17 +90,7 @@ class BankAccounts extends Component {
                 />
               ))}
             </div>
-            <SubmitGroup
-              errors={this.props.errors}
-              fields={this.props.fields}
-              savePartial={this.saveInvalidFormAndContinue}
-              clearErrors={() => {
-                this.props.reset("dependants");
-              }}
-              formValues={this.props.formValues}
-              onSkipClick={() => this.props.history.push("/dashboard")}
-            />
-          </form>
+            
         )}
       </div>
     );
