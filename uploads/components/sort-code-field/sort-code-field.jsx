@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import splitter from "../../utils/string-splitter";
 import formStyles from "../../sass/forms.scss";
-import fieldStyles from "../Fields.scss";
 import styles from "./sort-code-field.scss";
 import Tooltip from "../../components/Tooltip/tooltip";
 import _ from "lodash";
@@ -13,6 +12,10 @@ export default class SortCodeField extends Component {
     // console.log('IN cons',props);
     this.state = this.setStateForSortCodeInputs(props.fieldValue);
   }
+
+  // componentDidMount() {
+  //   this.props.input.onBlur("");
+  // }
 
   setStateForSortCodeInputs(value) {
     if (!value) {
@@ -32,6 +35,16 @@ export default class SortCodeField extends Component {
     };
     //  console.log(...obj);
     return { ...obj };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.meta.touched && !this.combinedValue(this.state)) {
+      // console.log(nextProps);
+      // nextProps.input.onBlur("");
+      // nextProps.input.onChange("");
+      this.props.input.onBlur("");
+      this.props.input.onChange("");
+    }
   }
 
   handleChange = (e, nextId) => {
@@ -63,6 +76,7 @@ export default class SortCodeField extends Component {
   };
 
   propogateToForm = (state, error) => {
+    console.log(state, error);
     if (error || this.combinedValue(state).length === 6) {
       this.props.input.onBlur(this.combinedValue(state));
       this.props.input.onChange(this.combinedValue(state));
@@ -79,6 +93,7 @@ export default class SortCodeField extends Component {
       classNames,
       maxLength
     } = this.props;
+    console.log(touched);
 
     return (
       <div className={classNames}>
@@ -86,12 +101,22 @@ export default class SortCodeField extends Component {
           <label className="col-12">{label}</label>
           {helpText && <Tooltip iconName="question-circle" text={helpText} />}
         </div>
+        {/* <input
+          type="hidden"
+          {...input}
+          value={`${this.state.sc1.value}${this.state.sc3.value}${
+            this.state.sc3.value
+          }`}
+        /> */}
         <div className={styles.codes}>
           <input
             id="sc1"
             maxLength={maxLength}
             className={` ${styles["sort-code-input"]} ${
-              this.state.sc1.error || (touched && !this.combinedValue(this.state)) ? "input-error" : ""
+              this.state.sc1.error ||
+              (touched && !this.combinedValue(this.state))
+                ? "input-error"
+                : ""
             }`}
             value={this.state.sc1.value}
             onChange={e => this.handleChange(e, "sc2")}
@@ -102,7 +127,10 @@ export default class SortCodeField extends Component {
             ref={cntr => (this.sc2 = cntr)}
             maxLength={maxLength}
             className={`${styles["sort-code-input"]} ${
-              this.state.sc2.error || (touched && !this.combinedValue(this.state)) ? "input-error" : ""
+              this.state.sc2.error ||
+              (touched && !this.combinedValue(this.state))
+                ? "input-error"
+                : ""
             }`}
             value={this.state.sc2.value}
             onChange={e => this.handleChange(e, "sc3")}
@@ -113,7 +141,10 @@ export default class SortCodeField extends Component {
             ref={cntr => (this.sc3 = cntr)}
             maxLength={maxLength}
             className={`${styles["sort-code-input"]} ${
-              this.state.sc3.error || (touched && !this.combinedValue(this.state))? "input-error" : ""
+              this.state.sc3.error ||
+              (touched && !this.combinedValue(this.state))
+                ? "input-error"
+                : ""
             }`}
             value={this.state.sc3.value}
             onChange={this.handleChange}
