@@ -56,7 +56,6 @@ class SubmitGroup extends Component {
 
   render() {
     const { classNames, disabled, onSkipClick } = this.props;
-    console.log(this.props.errors);
     return (
       <div
         className={submitStyles.container}
