@@ -5,12 +5,14 @@ var afterTime = "2018-05-22T06:00:00"
 var path = require('path');
 var mkdirp = require('mkdirp');
 var toDir = process.platform === 'darwin' ? "/Users/msethi/code/ofc/uploads" : 'C:/dev/wealth-onboarding/client/src';
+var lastFolderName = dir.split("/").reverse()[0];
 
 var getFileInfo = function(fileName) {
   var fileTime = fs.statSync(fileName).mtime.getTime();
+
   return {
     name: fileName,
-    dir: path.dirname(fileName),
+    
     changed: moment(fileTime) > moment(afterTime)
   }
 }
@@ -42,10 +44,12 @@ var walk = function(dir, done) {
 };
 
 var copyFiles = function(results) {
+  console.log(lastFolderName);
   results.forEach(f => {
-    var correctPath = path.dirname(f.name.substr(f.name.indexOf('src') + 4));
-    console.log(f.name, correctPath);
+    var correctPath = path.dirname(f.name.substr(f.name.indexOf(lastFolderName) + lastFolderName.length +1));
+    console.log( correctPath);
     var destDir = toDir + "/" + correctPath + "/";
+    console.log(f.name, destDir+ path.basename(f.name));
     if (!fs.existsSync(destDir)) {
       mkdirp(destDir, function(err) {
         if (!err) {
