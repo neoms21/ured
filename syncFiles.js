@@ -12,7 +12,7 @@ var getFileInfo = function(fileName) {
 
   return {
     name: fileName,
-    
+
     changed: moment(fileTime) > moment(afterTime)
   }
 }
@@ -44,12 +44,12 @@ var walk = function(dir, done) {
 };
 
 var copyFiles = function(results) {
-  console.log(lastFolderName);
+  //console.log(lastFolderName);
   results.forEach(f => {
     var correctPath = path.dirname(f.name.substr(f.name.indexOf(lastFolderName) + lastFolderName.length +1));
-    console.log( correctPath);
+    //console.log( correctPath);
     var destDir = toDir + "/" + correctPath + "/";
-    console.log(f.name, destDir+ path.basename(f.name));
+    console.log(`Copying file from ${f.name} to ${destDir+ path.basename(f.name)}`);
     if (!fs.existsSync(destDir)) {
       mkdirp(destDir, function(err) {
         if (!err) {
