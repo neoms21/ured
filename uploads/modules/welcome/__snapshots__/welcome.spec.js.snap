@@ -1,0 +1,181 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders welcome page 1`] = `
+<div
+  className="welcome"
+>
+  <div
+    className="content"
+  >
+    <div
+      className="title"
+    >
+      <h1 />
+      <h2>
+        Introduction to your Application
+      </h2>
+    </div>
+    <div
+      className="terms"
+    >
+      <div
+        className="start-top"
+      >
+        <a
+          className="blank skipSubmit"
+          id="btnStartTop"
+          onClick={[Function]}
+          type="button"
+        >
+          Start application
+        </a>
+        <div
+          className="chevron-right chevron"
+        />
+      </div>
+      <div
+        className="section"
+      >
+        <div
+          className="container"
+        >
+          <img
+            alt="easy"
+            src="images/easy.svg"
+          />
+          <h2>
+            Easy to complete
+          </h2>
+        </div>
+        <div>
+          <ul
+            className="undefined list"
+          >
+            <li>
+               
+              Pre-filled with all the information we already know
+            </li>
+            <li>
+               
+              Divided into sections that can be individually submitted for review
+            </li>
+            <li>
+               
+              Save and return so you can complete when convenient to you
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div
+        className="section"
+      >
+        <div
+          className="container"
+        >
+          <img
+            alt="need"
+            src="images/need.svg"
+          />
+          <h2>
+            What you'll need
+          </h2>
+        </div>
+        <div>
+          <ul
+            className="undefined list"
+          >
+            <li>
+               
+              Property values and mortgage balances
+            </li>
+            <li>
+               
+              Details and values of existing investment portfolios, SIPPs and pensions, and any other investments
+            </li>
+            <li>
+               
+              National insurance number (or tax identification number if non-UK)
+            </li>
+            <li>
+               
+              Photo ID such as a passport or driving licence and a recent utility bill
+            </li>
+            <li>
+               
+              Bank account details
+            </li>
+            <li>
+               
+              Details of your accountant and legal adviser
+            </li>
+          </ul>
+        </div>
+        <p
+          className="external"
+        >
+          View full list of information you will need
+           
+          .
+        </p>
+      </div>
+      <div
+        className="section"
+      >
+        <div
+          className="container"
+        >
+          <img
+            alt="long"
+            src="images/long.svg"
+          />
+          <h2>
+            How long will it take?
+          </h2>
+        </div>
+        <div>
+          <ul
+            className="undefined list"
+          >
+            <li>
+               
+              2 to 4 hours to complete all fields
+            </li>
+            <li>
+               
+              When you submit a section we will get back to you within 2 working days 
+            </li>
+            <li>
+               
+              Once complate and signed should have your account set up within 1 week
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div
+        className="ready"
+      >
+        <span
+          className="ready-text"
+        >
+          Ready?
+        </span>
+        <button
+          className=" button border-button  "
+          onClick={[Function]}
+          type="button"
+        >
+          <span>
+             
+            Start application
+            <img
+              alt="play"
+              className="image"
+              src="images/play.svg"
+            />
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
