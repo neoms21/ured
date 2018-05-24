@@ -1,0 +1,27 @@
+@import './variables.scss';
+.underline {
+    text-decoration: underline;
+}
+
+.form-sub-heading {
+    margin-top: 60px;
+}
+
+
+.chevron-right {
+    margin-left: 5px;
+    margin-right: 10px;
+    width: 8px;
+    height: 8px;
+    border-top: solid 2px $brand-primary;
+    border-right: solid 2px $brand-primary;
+    transform: rotate(45deg);
+}
+
+.paragraph {
+    margin-top: 30px;
+}
+
+.info {
+    margin-top: 30px;
+}

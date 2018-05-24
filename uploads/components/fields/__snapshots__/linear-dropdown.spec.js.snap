@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders linear dropdown 1`] = `
+<div
+  className="container"
+  id="x"
+>
+  <div
+    className="col-12  label-container"
+  >
+    <label>
+      abc
+    </label>
+  </div>
+  <div
+    className=" list-container undefined"
+  >
+    <div
+      className=" list-item list-item-last"
+      id="btn-undefined"
+      onClick={[Function]}
+    />
+    <div
+      className="other-list-item"
+      onClick={[Function]}
+    >
+      Other
+    </div>
+  </div>
+</div>
+`;

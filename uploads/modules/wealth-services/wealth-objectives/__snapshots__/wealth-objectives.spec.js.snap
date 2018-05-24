@@ -1,0 +1,158 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Wealth Objectives tests renders empty welath objectives page 1`] = `
+<div
+  className="container"
+>
+  <h2>
+    Your wealth planning objectives
+  </h2>
+</div>
+`;
+
+exports[`Wealth Objectives tests renders renders page when load is complete 1`] = `
+<div
+  className="container"
+>
+  <h2>
+    Your wealth planning objectives
+  </h2>
+  <div>
+    <form
+      onSubmit={undefined}
+    >
+      <div
+        className="col-12 label-container"
+      >
+        <label>
+          Select your specific wealth planning objectives
+        </label>
+      </div>
+      <div>
+        <div
+          className="items"
+        >
+          <button
+            className="round-button "
+            id="btnOther"
+            onClick={[Function]}
+            type="button"
+          >
+            Other
+          </button>
+        </div>
+      </div>
+      <h2
+        className="form-sub-heading"
+      >
+        Our wealth planning charges
+      </h2>
+      <p
+        className="para"
+      >
+        Please see the
+         
+        <span
+          className="underline"
+        >
+          Services and costs
+        </span>
+         
+         document for charges related to our wealth planning service. This document is also available in the documents section of this application portal.
+      </p>
+      <p
+        className="label"
+      >
+        Please select which service you require
+      </p>
+      <div
+        className="big-button-container"
+      >
+        <button
+          className=" big-button border-button  "
+          onClick={[Function]}
+          type="button"
+        >
+          <span>
+             
+            On-going wealth planning advice
+          </span>
+        </button>
+        <button
+          className=" big-button border-button  "
+          onClick={[Function]}
+          type="button"
+        >
+          <span>
+             
+            One-off advice
+          </span>
+        </button>
+      </div>
+      <h2
+        className="form-sub-heading"
+      >
+        Your existing or previous planning arrangements
+      </h2>
+      <div
+        className="col-12 label-container"
+      >
+        <label>
+          Have you received wealth planning or financial planning advice in the past, or do you have an existing adviser?
+        </label>
+      </div>
+      <div
+        className="container"
+        id="linearList"
+      >
+        <div
+          className=" list-container undefined"
+        >
+          <div
+            className=" list-item "
+            id="btn-true"
+            onClick={[Function]}
+          >
+            Yes
+          </div>
+          <div
+            className=" list-item list-item-last"
+            id="btn-false"
+            onClick={[Function]}
+          >
+            No
+          </div>
+        </div>
+      </div>
+      <div
+        className="container"
+      >
+        <div
+          className="button-container undefined"
+        >
+          <button
+            className="blank skipSubmit"
+            id="btnSkip"
+            onClick={[Function]}
+            type="button"
+          >
+            Skip for now
+          </button>
+          <div
+            className="chevron"
+          />
+          <button
+            className="primary primary btn-disabled"
+            disabled={true}
+            id="btnSubmit"
+            onClick={[Function]}
+            type="submit"
+          >
+            Save and continue
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+`;

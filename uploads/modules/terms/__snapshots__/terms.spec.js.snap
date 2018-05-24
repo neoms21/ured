@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Terms tests renders terms page and invoke fetch terms 1`] = `
+<div
+  className="terms"
+>
+  <div
+    className="content"
+  >
+    <h1>
+      Application terms
+    </h1>
+  </div>
+</div>
+`;

@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`header tests should render the header 1`] = `
+<div
+  className="gx-header"
+>
+  <div
+    className="container"
+  >
+    <div
+      className="header"
+    >
+      <div
+        className="header-left"
+      >
+        <a
+          id="logo"
+        >
+          <img
+            alt="Cazenove Capital"
+            className="logo"
+            src="http://cazenovecapital.com/sysglobalassets/global-assets/brand-generic/logo/logo_homepage_cazenove_white.svg"
+          />
+        </a>
+      </div>
+      <div
+        className="header-right"
+      />
+    </div>
+  </div>
+</div>
+`;
