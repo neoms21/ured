@@ -90,7 +90,7 @@ describe("Wealth services Reducer", () => {
     });
 
     const selectedObjectives = result.objectives.filter(o => o.selected);
-
+    expect(result.objectives.length).toEqual(7);
     expect(selectedObjectives.length).toEqual(4);
     expect(selectedObjectives).toEqual([
       { id: "1", value: "Income", selected: true },

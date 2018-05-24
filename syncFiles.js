@@ -1,7 +1,7 @@
 var dir = process.platform === 'darwin' ? "/Users/msethi/code/cob/src" : 'C:/code/ured/uploads';
 var fs = require('fs');
 var moment = require('moment');
-var afterTime = "2018-05-22T06:00:00"
+var afterTime = "2018-05-24T13:30:00"
 var path = require('path');
 var mkdirp = require('mkdirp');
 var toDir = process.platform === 'darwin' ? "/Users/msethi/code/ofc/uploads" : 'C:/dev/wealth-onboarding/client/src';
