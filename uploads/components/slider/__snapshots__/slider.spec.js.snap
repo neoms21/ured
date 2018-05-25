@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Slider tests should render the slider component 1`] = `
+<div
+  className="container"
+>
+  <h3>
+     
+  </h3>
+  <img
+    alt="marker"
+    onClick={undefined}
+    src="images/slider-button.svg"
+    style={
+      Object {
+        "left": undefined,
+        "position": "absolute",
+        "top": "90px",
+        "transition": "left .1s linear",
+        "zIndex": 99999,
+      }
+    }
+  />
+  <div
+    className="slider"
+  >
+    <a
+      className="step"
+      id="step-1"
+      onClick={[Function]}
+    >
+      <div
+        id="left"
+      />
+      <div
+        className="divider"
+      />
+      <span
+        className="stepLabel"
+      >
+        11
+      </span>
+      <div
+        id="right"
+      />
+    </a>
+    <a
+      className="step"
+      id="step-2"
+      onClick={[Function]}
+    >
+      <div
+        id="left"
+      />
+      <div
+        className="divider"
+      />
+      <span
+        className="stepLabel"
+      >
+        11
+      </span>
+      <div
+        id="right"
+      />
+    </a>
+    <a
+      className="step"
+      id="step-3"
+      onClick={[Function]}
+    >
+      <div
+        id="left"
+      />
+      <div
+        className="divider"
+      />
+      <span
+        className="stepLabel"
+      >
+        11
+      </span>
+      <div
+        id="right"
+      />
+    </a>
+  </div>
+</div>
+`;

@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders linear dropdown 1`] = `
+<div
+  className="container"
+>
+  <img
+    alt=" xyz"
+    src="images/ xyz.svg"
+  />
+  <h2>
+    abc
+  </h2>
+</div>
+`;
