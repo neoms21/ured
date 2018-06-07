@@ -1,0 +1,57 @@
+@import "../../../sass/variables";
+.container {
+  border-radius: 3px;
+  background-color: #2d55b2;
+  display: flex;
+  align-items: flex-start;
+  color: white;
+  padding: 15px;
+  margin-top: 20px;
+}
+
+.container-light {
+  @extend .container;
+  background-color: $body-background;
+  color: $brand-primary-hover;
+}
+
+.paragraph {
+  margin-top: 20px;
+}
+
+.content {
+  margin-left: 20px;
+}
+
+.circle {
+  height: 20px;
+  width: 10px;
+  border: solid 2px white;
+}
+
+.left {
+  @extend .circle;
+  border-right: none;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.right {
+  @extend .circle;
+  border-left: none;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  margin-left: -1px;
+  margin-right: -1px;
+}
+
+.buttons {
+  background: white;
+  color: $brand-primary;
+  margin-top: 25px;
+}

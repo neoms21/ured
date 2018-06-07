@@ -1,0 +1,100 @@
+@import "../../sass/variables";
+.dashboard {
+    background-color: $white-color;
+    padding: 40px 50px;
+}
+
+.section-body {
+    font-family: CircularStd-Light, Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: $brand-primary;
+    margin-left: 8px;
+    padding-left: 27px;
+    border-left: 2px solid rgba(151, 151, 151, 0.5);
+    padding-bottom: 10px;
+    padding-top: 15px;
+}
+
+.sub-section {
+    margin-bottom: 20px;
+    cursor: pointer;
+    display: flex;
+    font-family: NotoSans-Regular, Arial, "Helvetica Neue", Helvetica, sans-serif;
+    border: 0;
+    background: transparent;
+    font-size: 18px;
+    align-items: center;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 3px;
+}
+
+.sub-section:hover {
+    color: $brand-primary-hover;
+    border-bottom: 1px solid $brand-primary-hover;
+    padding-bottom: 3px;
+}
+
+.sub-section:hover .chevron {
+    border-top: 2px solid $brand-primary-hover;
+    border-right: 2px solid $brand-primary-hover;
+}
+
+.chevron {
+    margin-left: 10px;
+    width: 8px;
+    height: 8px;
+    border-top: solid 2px $brand-primary;
+    border-right: solid 2px $brand-primary;
+    transform: rotate(45deg);
+}
+
+.title {
+    display: flex;
+    font-family: "CircularStd-Bold", Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #002a5e;
+    align-items: center;
+    cursor: pointer;
+}
+
+.separator {
+    border: solid 1px #979797;
+    margin-left: 40px;
+}
+
+.title-indicator {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.indicator {
+    margin-right: 16px;
+    font-size: 24px !important;
+}
+
+.complete {
+    margin-left: 16px;
+    color: #63C532;
+    font-size: 24px !important;
+}
+
+.checkMark {
+    display: inline-block; // margin-left: -18px;
+    &:after {
+        /*Add another block-level blank space*/
+        content: "";
+        display: block;
+        width: 7px;
+        height: 12px;
+        border: solid $checked;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+        margin-left: -32px;
+        margin-top: -3px;
+    }
+}
