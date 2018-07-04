@@ -18,6 +18,7 @@ import toggleRehydrate from "../../../helpers/toggle-rehydrate";
 import toggleListAnswer from "../../../helpers/toggle-list-answer";
 import { OPEN_MODAL, CLOSE_MODAL } from "../../body/body-action-types";
 import { SAVE_ACCOUNTS_SUCCESS } from "./../../banks/bank-accounts-action-types";
+import removeAllListItems from "../../../helpers/remove-all-listItems";
 
 const initialState = {
   fieldNames: [],
@@ -74,7 +75,6 @@ export default function income(state = initialState, action = "") {
 
       if (!state.bankAccountField) return { ...state, bankAccounts: result };
 
-
       const newState = {
         ...toggleRehydrate(
           state,
@@ -104,53 +104,12 @@ export default function income(state = initialState, action = "") {
     }
 
     case REMOVE_ALL_PAYMENTS: {
-      const { currentValues } = action.payload;
-
-      let listFields = {};
-      const lf = "portfolioRegularPayments";
-
-      let arr = [];
-      for (let i = 0; i < state[lf].length; i++) {
-        let x = { fields: {}, entityId: state[lf][i].entityId };
-        state.fields[lf].fields.forEach(field => {
-          const prop = `${field}${i + 1}`;
-          // console.log(state[lf]);
-          x = {
-            ...x,
-            fields: {
-              ...x.fields,
-              [prop]: {
-                ...state.schema[field],
-                value: currentValues[prop],
-                key: prop
-              }
-            },
-            delete: true
-          };
-        });
-
-        arr.push(x);
-      }
-      listFields = { ...listFields, [lf]: arr };
-
-      // const filteredRegularPayments = state.portfolioRegularPayments
-      //   // .filter(d => d.entityId)
-      //   .map(d => {
-      //     return { ...d, delete: true };
-      //   });
-
-      return {
-        ...state,
-        portfolioRegularPayments: [...arr],
-        repetitions: 0,
-        fields: {
-          ...state.fields,
-          portfolioWithdrawals: {
-            ...state.fields["portfolioWithdrawals"],
-            value: false
-          }
-        }
-      };
+      return removeAllListItems(
+        state,
+        action,
+        "portfolioRegularPayments",
+        "portfolioWithdrawals"
+      );
     }
 
     case TOGGLE_INCOME_REQUIREMENTS: {

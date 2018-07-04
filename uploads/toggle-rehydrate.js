@@ -7,6 +7,7 @@ export default function(
 ) {
   let newFields = {},
     listFields = {};
+
   const listContainerFields = Object.keys(state.fields).filter(
     f => state.fields[f].fields !== undefined
   );
@@ -23,7 +24,7 @@ export default function(
             ? answer
             : currentValues
               ? currentValues[prop]
-              : state[lf][i-1].fields[prop].value;
+              : state[lf][i - 1].fields[prop].value;
         x = {
           ...x,
           fields: {
@@ -57,13 +58,15 @@ export default function(
     };
   });
 
-  newFields = {
-    ...newFields,
-    [toggleField]: {
-      ...state.fields[toggleField],
-      value: answer
-    }
-  };
+  if (toggleField)
+    newFields = {
+      ...newFields,
+      [toggleField]: {
+        ...state.fields[toggleField],
+        value: answer
+      }
+    };
+
   fieldsToProcess.forEach(f => {
     newFields = {
       ...newFields,

@@ -7,7 +7,9 @@ import {
   FETCH_PORTFOLIO_INCOME_SUCCESS,
   TOGGLE_INCOME_REQUIREMENTS,
   TOGGLE_INCOME_SEPARATE,
-  TOGGLE_REGULAR_PAYMENTS
+  TOGGLE_REGULAR_PAYMENTS,
+  REMOVE_ALL_PAYMENTS,
+  HYDRATE_STATE_BEFORE_ACCOUNT
 } from "./income-action-types";
 
 const schema = {
@@ -737,235 +739,576 @@ describe("income reducer", () => {
       bankAccountId: "12"
     });
   });
-});
 
-it("should hydrate the state for inner item on accounts fetch success", () => {
-  const state = {
-    fields: {
-      a: {},
-      b: {},
-      portfolioRegularPayments: {
-        type: "entityList/regularPaymentInstruction",
-        readonly: false,
-        mandatory: true,
-        fields: [
-          "regularPaymentBankAccountId",
-          "regularPaymentAmount",
-          "regularPaymentFrequency",
-          "regularPaymentStartDate",
-          "regularPaymentSource"
-        ]
-      }
-    },
-    schema: schema,
-    portfolioRegularPayments: [
-      {
-        entityId: "99",
-        fields: {
-          regularPaymentAmount1: {
-            key: "regularPaymentAmount1",
-            label: "Amount",
-            mandatory: true,
-            readonly: false,
-            type: "currency",
-            value: "222"
-          },
-          regularPaymentBankAccountId1: {
-            key: "regularPaymentBankAccountId1",
-            label: "Bank account",
-            mandatory: true,
-            readonly: false,
-            type: "text",
-            value: "123"
-          },
-          regularPaymentFrequency1: {
-            key: "regularPaymentFrequency1",
-            label: "Frequency",
-            mandatory: true,
-            readonly: false,
-            type: "text",
-            value: 1
-          },
-          regularPaymentSource1: {
-            key: "regularPaymentSource1",
-            mandatory: true,
-            readonly: false,
-            type: "text",
-            value: 2
-          },
-          regularPaymentStartDate1: {
-            key: "regularPaymentStartDate1",
-            mandatory: true,
-            readonly: false,
-            type: "date",
-            value: "23/03/2018"
-          }
+  it("should hydrate the state for inner item on accounts fetch success", () => {
+    const state = {
+      fields: {
+        a: {},
+        b: {},
+        portfolioRegularPayments: {
+          type: "entityList/regularPaymentInstruction",
+          readonly: false,
+          mandatory: true,
+          fields: [
+            "regularPaymentBankAccountId",
+            "regularPaymentAmount",
+            "regularPaymentFrequency",
+            "regularPaymentStartDate",
+            "regularPaymentSource"
+          ]
         }
       },
-      {
-        fields: {
-          regularPaymentAmount2: {
-            key: "regularPaymentAmount2",
-            label: "Amount",
-            mandatory: true,
-            readonly: false,
-            type: "currency",
-            value: "9090"
-          },
-          regularPaymentBankAccountId2: {
-            key: "regularPaymentBankAccountId2",
-            label: "Bank account",
-            mandatory: true,
-            readonly: false,
-            type: "text",
-            value: ""
-          },
-          regularPaymentFrequency2: {
-            key: "regularPaymentFrequency2",
-            label: "Frequency",
-            mandatory: true,
-            readonly: false,
-            type: "text",
-            value: 1
-          },
-          regularPaymentSource2: {
-            key: "regularPaymentSource2",
-            mandatory: true,
-            readonly: false,
-            type: "text",
-            value: undefined
-          },
-          regularPaymentStartDate2: {
-            key: "regularPaymentStartDate2",
-            mandatory: true,
-            readonly: false,
-            type: "date",
-            value: undefined
+      schema: schema,
+      portfolioRegularPayments: [
+        {
+          entityId: "99",
+          fields: {
+            regularPaymentAmount1: {
+              key: "regularPaymentAmount1",
+              label: "Amount",
+              mandatory: true,
+              readonly: false,
+              type: "currency",
+              value: "222"
+            },
+            regularPaymentBankAccountId1: {
+              key: "regularPaymentBankAccountId1",
+              label: "Bank account",
+              mandatory: true,
+              readonly: false,
+              type: "text",
+              value: "123"
+            },
+            regularPaymentFrequency1: {
+              key: "regularPaymentFrequency1",
+              label: "Frequency",
+              mandatory: true,
+              readonly: false,
+              type: "text",
+              value: 1
+            },
+            regularPaymentSource1: {
+              key: "regularPaymentSource1",
+              mandatory: true,
+              readonly: false,
+              type: "text",
+              value: 2
+            },
+            regularPaymentStartDate1: {
+              key: "regularPaymentStartDate1",
+              mandatory: true,
+              readonly: false,
+              type: "date",
+              value: "23/03/2018"
+            }
+          }
+        },
+        {
+          fields: {
+            regularPaymentAmount2: {
+              key: "regularPaymentAmount2",
+              label: "Amount",
+              mandatory: true,
+              readonly: false,
+              type: "currency",
+              value: "9090"
+            },
+            regularPaymentBankAccountId2: {
+              key: "regularPaymentBankAccountId2",
+              label: "Bank account",
+              mandatory: true,
+              readonly: false,
+              type: "text",
+              value: ""
+            },
+            regularPaymentFrequency2: {
+              key: "regularPaymentFrequency2",
+              label: "Frequency",
+              mandatory: true,
+              readonly: false,
+              type: "text",
+              value: 1
+            },
+            regularPaymentSource2: {
+              key: "regularPaymentSource2",
+              mandatory: true,
+              readonly: false,
+              type: "text",
+              value: undefined
+            },
+            regularPaymentStartDate2: {
+              key: "regularPaymentStartDate2",
+              mandatory: true,
+              readonly: false,
+              type: "date",
+              value: undefined
+            }
           }
         }
-      }
-    ],
-    bankAccountField: "regularPaymentBankAccountId2",
-    bankAccountId: "343",
-    isListField: true
-  };
+      ],
+      bankAccountField: "regularPaymentBankAccountId2",
+      bankAccountId: "343",
+      isListField: true
+    };
 
-  const result = reducer(state, {
-    type: FETCH_ACCOUNTS_SUCCESS,
-    payload: { accounts: { data: { bankAccounts: [{}, {}] } } }
+    const result = reducer(state, {
+      type: FETCH_ACCOUNTS_SUCCESS,
+      payload: { accounts: { data: { bankAccounts: [{}, {}] } } }
+    });
+
+    expect(result).toEqual({
+      bankAccountField: "",
+      bankAccountId: "",
+      bankAccounts: [
+        { id: undefined, value: "" },
+        { id: undefined, value: "" }
+      ],
+      fields: {
+        a: { value: undefined },
+        b: { value: undefined },
+        portfolioRegularPayments: {
+          type: "entityList/regularPaymentInstruction",
+          readonly: false,
+          mandatory: true,
+          fields: [
+            "regularPaymentBankAccountId",
+            "regularPaymentAmount",
+            "regularPaymentFrequency",
+            "regularPaymentStartDate",
+            "regularPaymentSource"
+          ]
+        },
+        regularPaymentBankAccountId2: { value: "343" }
+      },
+      isListField: undefined,
+      portfolioRegularPayments: [
+        {
+          entityId: "99",
+          fields: {
+            regularPaymentAmount1: {
+              key: "regularPaymentAmount1",
+              label: "Amount",
+              mandatory: true,
+              readonly: false,
+              type: "currency",
+              value: "222"
+            },
+            regularPaymentBankAccountId1: {
+              key: "regularPaymentBankAccountId1",
+              label: "Bank account",
+              mandatory: true,
+              readonly: false,
+              type: "text",
+              value: "123"
+            },
+            regularPaymentFrequency1: {
+              key: "regularPaymentFrequency1",
+              label: "Frequency",
+              mandatory: true,
+              readonly: false,
+              type: "text",
+              value: 1
+            },
+            regularPaymentSource1: {
+              key: "regularPaymentSource1",
+              mandatory: true,
+              readonly: false,
+              type: "text",
+              value: 2
+            },
+            regularPaymentStartDate1: {
+              key: "regularPaymentStartDate1",
+              mandatory: true,
+              readonly: false,
+              type: "date",
+              value: "23/03/2018"
+            }
+          }
+        },
+        {
+          entityId: undefined,
+          fields: {
+            regularPaymentAmount2: {
+              key: "regularPaymentAmount2",
+              label: "Amount",
+              mandatory: true,
+              readonly: false,
+              type: "currency",
+              value: "9090"
+            },
+            regularPaymentBankAccountId2: {
+              key: "regularPaymentBankAccountId2",
+              label: "Bank account",
+              mandatory: true,
+              readonly: false,
+              type: "text",
+              value: "343"
+            },
+            regularPaymentFrequency2: {
+              key: "regularPaymentFrequency2",
+              label: "Frequency",
+              mandatory: true,
+              readonly: false,
+              type: "text",
+              value: 1
+            },
+            regularPaymentSource2: {
+              key: "regularPaymentSource2",
+              mandatory: true,
+              readonly: false,
+              type: "text",
+              value: undefined
+            },
+            regularPaymentStartDate2: {
+              key: "regularPaymentStartDate2",
+              mandatory: true,
+              readonly: false,
+              type: "date",
+              value: undefined
+            }
+          }
+        }
+      ],
+      schema: schema
+    });
   });
 
-  expect(result).toEqual({
-    bankAccountField: "",
-    bankAccountId: "",
-    bankAccounts: [{ id: undefined, value: "" }, { id: undefined, value: "" }],
-    fields: {
-      a: { value: undefined },
-      b: { value: undefined },
-      portfolioRegularPayments: {
-        type: "entityList/regularPaymentInstruction",
-        readonly: false,
-        mandatory: true,
-        fields: [
-          "regularPaymentBankAccountId",
-          "regularPaymentAmount",
-          "regularPaymentFrequency",
-          "regularPaymentStartDate",
-          "regularPaymentSource"
-        ]
-      },
-      regularPaymentBankAccountId2: { value: "343" }
-    },
-    isListField: undefined,
-    portfolioRegularPayments: [
-      {
-        entityId: "99",
-        fields: {
-          regularPaymentAmount1: {
-            key: "regularPaymentAmount1",
-            label: "Amount",
-            mandatory: true,
-            readonly: false,
-            type: "currency",
-            value: "222"
-          },
-          regularPaymentBankAccountId1: {
-            key: "regularPaymentBankAccountId1",
-            label: "Bank account",
-            mandatory: true,
-            readonly: false,
-            type: "text",
-            value: "123"
-          },
-          regularPaymentFrequency1: {
-            key: "regularPaymentFrequency1",
-            label: "Frequency",
-            mandatory: true,
-            readonly: false,
-            type: "text",
-            value: 1
-          },
-          regularPaymentSource1: {
-            key: "regularPaymentSource1",
-            mandatory: true,
-            readonly: false,
-            type: "text",
-            value: 2
-          },
-          regularPaymentStartDate1: {
-            key: "regularPaymentStartDate1",
-            mandatory: true,
-            readonly: false,
-            type: "date",
-            value: "23/03/2018"
-          }
+  it("should remove all payments and keep the values", () => {
+    const state = {
+      fields: {
+        a: {},
+        portfolioWithdrawals: {},
+        portfolioRegularPayments: {
+          type: "entityList/regularPaymentInstruction",
+          readonly: false,
+          mandatory: true,
+          fields: [
+            "regularPaymentBankAccountId",
+            "regularPaymentAmount",
+            "regularPaymentFrequency",
+            "regularPaymentStartDate",
+            "regularPaymentSource"
+          ]
         }
       },
-      {
-        entityId: undefined,
-        fields: {
-          regularPaymentAmount2: {
-            key: "regularPaymentAmount2",
-            label: "Amount",
-            mandatory: true,
-            readonly: false,
-            type: "currency",
-            value: "9090"
-          },
-          regularPaymentBankAccountId2: {
-            key: "regularPaymentBankAccountId2",
-            label: "Bank account",
-            mandatory: true,
-            readonly: false,
-            type: "text",
-            value: "343"
-          },
-          regularPaymentFrequency2: {
-            key: "regularPaymentFrequency2",
-            label: "Frequency",
-            mandatory: true,
-            readonly: false,
-            type: "text",
-            value: 1
-          },
-          regularPaymentSource2: {
-            key: "regularPaymentSource2",
-            mandatory: true,
-            readonly: false,
-            type: "text",
-            value: undefined
-          },
-          regularPaymentStartDate2: {
-            key: "regularPaymentStartDate2",
-            mandatory: true,
-            readonly: false,
-            type: "date",
-            value: undefined
+      schema: schema,
+      portfolioRegularPayments: [
+        {
+          entityId: "99",
+          fields: {
+            regularPaymentAmount1: {
+              key: "regularPaymentAmount1",
+              label: "Amount",
+              mandatory: true,
+              readonly: false,
+              type: "currency",
+              value: "222"
+            },
+            regularPaymentBankAccountId1: {
+              key: "regularPaymentBankAccountId1",
+              label: "Bank account",
+              mandatory: true,
+              readonly: false,
+              type: "text",
+              value: "123"
+            },
+            regularPaymentFrequency1: {
+              key: "regularPaymentFrequency1",
+              label: "Frequency",
+              mandatory: true,
+              readonly: false,
+              type: "text",
+              value: 1
+            },
+            regularPaymentSource1: {
+              key: "regularPaymentSource1",
+              mandatory: true,
+              readonly: false,
+              type: "text",
+              value: 2
+            },
+            regularPaymentStartDate1: {
+              key: "regularPaymentStartDate1",
+              mandatory: true,
+              readonly: false,
+              type: "date",
+              value: "23/03/2018"
+            }
           }
+        },
+        {
+          fields: {
+            regularPaymentAmount2: {
+              key: "regularPaymentAmount2",
+              label: "Amount",
+              mandatory: true,
+              readonly: false,
+              type: "currency",
+              value: "9090"
+            },
+            regularPaymentBankAccountId2: {
+              key: "regularPaymentBankAccountId2",
+              label: "Bank account",
+              mandatory: true,
+              readonly: false,
+              type: "text",
+              value: ""
+            },
+            regularPaymentFrequency2: {
+              key: "regularPaymentFrequency2",
+              label: "Frequency",
+              mandatory: true,
+              readonly: false,
+              type: "text",
+              value: 1
+            },
+            regularPaymentSource2: {
+              key: "regularPaymentSource2",
+              mandatory: true,
+              readonly: false,
+              type: "text",
+              value: undefined
+            },
+            regularPaymentStartDate2: {
+              key: "regularPaymentStartDate2",
+              mandatory: true,
+              readonly: false,
+              type: "date",
+              value: undefined
+            }
+          }
+        }
+      ]
+    };
+
+    const result = reducer(state, {
+      type: REMOVE_ALL_PAYMENTS,
+      payload: {
+        currentValues: {
+          regularPaymentAmount2: 5989
         }
       }
-    ],
-    schema: schema
+    });
+
+    expect(result).toEqual({
+      fields: {
+        a: {},
+        portfolioRegularPayments: {
+          fields: [
+            "regularPaymentBankAccountId",
+            "regularPaymentAmount",
+            "regularPaymentFrequency",
+            "regularPaymentStartDate",
+            "regularPaymentSource"
+          ],
+          mandatory: true,
+          readonly: false,
+          type: "entityList/regularPaymentInstruction"
+        },
+        portfolioWithdrawals: { value: false }
+      },
+      portfolioRegularPayments: [
+        {
+          delete: true,
+          entityId: "99",
+          fields: {
+            regularPaymentAmount1: {
+              key: "regularPaymentAmount1",
+              label: "Amount",
+              mandatory: true,
+              readonly: false,
+              type: "currency",
+              value: undefined
+            },
+            regularPaymentBankAccountId1: {
+              key: "regularPaymentBankAccountId1",
+              label: "Bank account",
+              mandatory: true,
+              readonly: false,
+              type: "text",
+              value: undefined
+            },
+            regularPaymentFrequency1: {
+              key: "regularPaymentFrequency1",
+              label: "Frequency",
+              mandatory: true,
+              readonly: false,
+              type: "text",
+              value: undefined
+            },
+            regularPaymentSource1: {
+              key: "regularPaymentSource1",
+              mandatory: true,
+              readonly: false,
+              type: "text",
+              value: undefined
+            },
+            regularPaymentStartDate1: {
+              key: "regularPaymentStartDate1",
+              mandatory: true,
+              readonly: false,
+              type: "date",
+              value: undefined
+            }
+          }
+        },
+        {
+          delete: true,
+          entityId: undefined,
+          fields: {
+            regularPaymentAmount2: {
+              key: "regularPaymentAmount2",
+              label: "Amount",
+              mandatory: true,
+              readonly: false,
+              type: "currency",
+              value: 5989
+            },
+            regularPaymentBankAccountId2: {
+              key: "regularPaymentBankAccountId2",
+              label: "Bank account",
+              mandatory: true,
+              readonly: false,
+              type: "text",
+              value: undefined
+            },
+            regularPaymentFrequency2: {
+              key: "regularPaymentFrequency2",
+              label: "Frequency",
+              mandatory: true,
+              readonly: false,
+              type: "text",
+              value: undefined
+            },
+            regularPaymentSource2: {
+              key: "regularPaymentSource2",
+              mandatory: true,
+              readonly: false,
+              type: "text",
+              value: undefined
+            },
+            regularPaymentStartDate2: {
+              key: "regularPaymentStartDate2",
+              mandatory: true,
+              readonly: false,
+              type: "date",
+              value: undefined
+            }
+          }
+        }
+      ],
+      repetitions: 0,
+      schema: {
+        portfolioIncomeRequired: {
+          label:
+            "Are you reliant on income or regular payments from the Portfolio?",
+          mandatory: true,
+          readonly: false,
+          type: "boolean"
+        },
+        portfolioIncomeSeparate: {
+          label: "Do you require income and capital to be kept separate?",
+          mandatory: true,
+          readonly: false,
+          type: "boolean"
+        },
+        portfolioManageIncome: {
+          label: "How would you like to manage the income?",
+          mandatory: true,
+          readonly: false,
+          type: "text"
+        },
+        portfolioManageIncomeBankAccountId: {
+          label: "",
+          mandatory: true,
+          readonly: false,
+          type: "text"
+        },
+        portfolioOtherIncomeRequirements: {
+          label: "Do you have any other income requirements?",
+          mandatory: true,
+          readonly: false,
+          type: "boolean"
+        },
+        portfolioOtherIncomeRequirementsDetail: {
+          label: "Provide details of these requirements?",
+          mandatory: true,
+          readonly: false,
+          type: "text"
+        },
+        portfolioRegularPayments: {
+          fields: [
+            "regularPaymentBankAccountId",
+            "regularPaymentAmount",
+            "regularPaymentFrequency",
+            "regularPaymentStartDate",
+            "regularPaymentSource"
+          ],
+          mandatory: true,
+          readonly: false,
+          type: "entityList/regularPaymentInstruction"
+        },
+        portfolioWithdrawals: {
+          label: "Do you require a regular fixed payment by standing order?",
+          mandatory: true,
+          readonly: false,
+          type: "boolean"
+        },
+        regularPaymentAmount: {
+          label: "Amount",
+          mandatory: true,
+          readonly: false,
+          type: "currency"
+        },
+        regularPaymentBankAccountId: {
+          label: "Bank account",
+          mandatory: true,
+          readonly: false,
+          type: "text"
+        },
+        regularPaymentFrequency: {
+          label: "Frequency",
+          mandatory: true,
+          readonly: false,
+          type: "text"
+        },
+        regularPaymentSource: {
+          mandatory: true,
+          readonly: false,
+          type: "text"
+        },
+        regularPaymentStartDate: {
+          mandatory: true,
+          readonly: false,
+          type: "date"
+        }
+      }
+    });
+  });
+
+  it("should hydrate the state before modal opening", () => {
+    const state = {
+      schema: { a: {}, b: {} },
+      fields: { a: {}, b: {} }
+    };
+
+    const result = reducer(state, {
+      type: HYDRATE_STATE_BEFORE_ACCOUNT,
+      payload: {
+        currentValues: { a: "123", b: "abcjh" },
+        fieldName: "abcc"
+      }
+    });
+
+    expect(result).toEqual({
+      bankAccountField: "abcc",
+      fields: {
+        a: { value: "123" },
+        b: { value: "abcjh" },
+      },
+      hydrate: true,
+      schema: { a: {}, b: {} }
+    });
   });
 });
 
