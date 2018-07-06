@@ -1,0 +1,97 @@
+@import "../../../sass/variables";
+@import "../dashboard.scss";
+
+.group-title {
+  font-family: "CircularStd-Book", Arial, "Helvetica Neue", Helvetica,
+    sans-serif;
+  font-weight: 300;
+  background: $white-color;
+  color: $black-colour;
+  cursor: pointer;
+  padding: 20px 50px;
+
+  svg {
+    color: $brand-primary;
+    font-size: 20px;
+  }
+
+  span {
+    font-size: 32px;
+  }
+}
+
+.group {
+  margin-bottom: 20px;
+}
+
+.group-title:focus {
+  @extend .item-focus;
+}
+
+.group-title-indicator {
+  @extend .title-indicator;
+  span {
+    flex: 1;
+  }
+}
+
+.group-checkmark {
+  content: "";
+  display: inline-block;
+  width: 15px;
+  height: 26px;
+  border: solid $green-highlight-color;
+  border-width: 0 7px 7px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  margin-left: 20;
+  margin-top: -3px;
+}
+
+// Arrow
+
+.accordion__arrow {
+  display: inline-block;
+  position: relative;
+  width: 24px;
+  height: 12px;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  margin-top: -6px;
+}
+
+.accordion__arrow::after,
+.accordion__arrow::before {
+  display: block;
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 2px;
+  background-color: currentColor;
+  content: "";
+}
+
+.accordion__arrow::before {
+  left: 4px;
+  transform: rotate(45deg);
+}
+
+[aria-expanded="true"] .accordion__arrow::before {
+  transform: rotate(-45deg);
+}
+
+.accordion__arrow::after {
+  right: 4px;
+  transform: rotate(-45deg);
+}
+
+[aria-expanded="true"] .accordion__arrow::after {
+  transform: rotate(45deg);
+}
+
+.accordion__arrow::before,
+.accordion__arrow::after {
+  transition: transform 0.25s ease, -webkit-transform 0.25s ease;
+}
