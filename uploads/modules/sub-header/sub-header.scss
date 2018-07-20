@@ -10,6 +10,12 @@
   align-items: center;
 }
 
+.review-ready {
+  background-color: $percentage-bg;
+  padding: 15px;
+}
+
+
 .titlePadding {
   padding-top: 30px;
   padding-bottom: 30px;
@@ -18,6 +24,7 @@
 .percentage {
   padding-top: 15px;
   padding-bottom: 15px;
+  position: relative;
 }
 
 .title .title-application {
@@ -77,4 +84,19 @@
   svg {
     margin-left: 16px;
   }
+}
+
+
+.review {
+  background-color: $brand-primary-hover;
+  color: $white-color;
+  position: absolute;
+  left: 0;
+  top: 124px;
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  padding: 4px 10px;
+  font-family: "CircularStd-Book";
+  cursor: pointer;
 }

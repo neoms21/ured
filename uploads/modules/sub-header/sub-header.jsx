@@ -5,6 +5,8 @@ import PercentageCircle from "../../components/percentage-circle";
 import { Link } from "react-router-dom";
 import Tracker from "../tracker/tracker-container";
 import Icon from "../../components/font-awesome/Icon";
+import Wizard from "../wizard/wizard-container";
+import { getReview } from "../wizard/wizard-thunks";
 
 class SubHeader extends Component {
   constructor(props) {
@@ -13,10 +15,22 @@ class SubHeader extends Component {
   }
 
   render() {
-    const { hide, title, percentage, showStatus, showTracker } = this.props;
+    const {
+      hide,
+      title,
+      percentage,
+      showStatus,
+      showTracker,
+      reviewReady,
+      getReview
+    } = this.props;
     if (!hide) {
       return (
-        <div className={`container ${styles.title} ${showStatus?"": styles.titlePadding}`}>
+        <div
+          className={`container ${styles.title} ${
+            showStatus ? "" : styles.titlePadding
+          } `}
+        >
           <div className={styles.backLinkContainer}>
             {!showStatus && (
               <div className={styles.backLink}>
@@ -47,8 +61,17 @@ class SubHeader extends Component {
             )}
           </div>
           {showStatus && (
-            <div className={styles.percentage}>
+            <div
+              className={`${styles.percentage} ${
+                reviewReady ? styles["review-ready"] : ""
+              } `}
+            >
               <PercentageCircle percent={percentage} color="#63C532" />
+              {reviewReady && (
+                <div className={styles.review} onClick={this.props.getReview}>
+                  Show me final 15%
+                </div>
+              )}
             </div>
           )}
         </div>
